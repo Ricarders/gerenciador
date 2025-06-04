@@ -1,0 +1,40 @@
+<h1>Extrato da Conta</h1>
+
+<% if @correntista %>
+  <p><strong>Correntista:</strong> <%= @correntista.nome %></p>
+  <p><strong>Conta Corrente:</strong> <%= @correntista.numero_conta %></p>
+<% end %>
+
+<hr>
+
+<% if @movimentacoes.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Data/Hora</th>
+        <th>Descrição</th>
+        <th style="text-align: right;">Valor (R$)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @movimentacoes.each do |movimentacao| %>
+        <tr>
+          <td><%= l movimentacao.created_at, format: :longo_com_hora %></td> 
+          <td><%= movimentacao.descricao %></td>
+          <td style="text-align: right; color: <%= movimentacao.valor.negative? ? 'red' : 'green' %>;">
+            <% if movimentacao.valor.negative? %>
+              (<%= number_to_currency(movimentacao.valor.abs, unit: "", separator: ",", delimiter: ".") %>)
+            <% else %>
+              <%= number_to_currency(movimentacao.valor, unit: "", separator: ",", delimiter: ".") %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Nenhuma movimentação encontrada para esta conta.</p>
+<% end %>
+
+<hr>
+<%= link_to "Voltar ao Painel", dashboard_path %>

@@ -1,0 +1,19 @@
+<h1>Realizar Depósito</h1>
+
+<% if flash.now[:alert] %>
+  <p style="color: red;"><%= flash.now[:alert] %></p>
+<% end %>
+
+<%= form_with(url: criar_deposito_path, method: :post, local: true, data: { turbo: false }) do |form| %>
+  <div class="field">
+    <%= form.label :valor_deposito, "Valor do Depósito (R$)" %><br>
+    <%= form.text_field :valor_deposito, placeholder: "Ex: 100.00 ou 100,00" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Depositar" %>
+  </div>
+<% end %>
+
+<hr>
+<%= link_to "Cancelar e Voltar ao Painel", dashboard_path %>

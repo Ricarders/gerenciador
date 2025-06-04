@@ -14,3 +14,9 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym "RESTful"
 # end
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.irregular 'correntista', 'correntistas'
+  inflect.irregular 'conta', 'contas'
+  inflect.irregular 'movimentacao', 'movimentacoes'
+  # Você pode adicionar outras inflexões aqui no futuro se precisar
+end

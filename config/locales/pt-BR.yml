@@ -27,5 +27,10 @@
 #       "yes": yup
 #       enabled: "ON"
 
-en:
-  hello: "Hello world"
+pt-BR:
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      long: "%d de %B de %Y, %H:%M"
+      short: "%d de %b, %H:%M"
+      longo_com_hora: "%d/%m/%Y às %H:%M:%S"

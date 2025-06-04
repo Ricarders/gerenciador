@@ -10,19 +10,38 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header> 
+      <nav style="padding: 10px; background-color: #f0f0f0; margin-bottom: 20px; text-align: right;">
+        <% if logged_in? %>
+          <span style="margin-right: 10px;">Olá, <%= current_correntista.nome %>!</span>
+          <%= button_to "Sair", logout_path, method: :delete, style: "display: inline-block;" %>
+        <% else %>
+          <%= link_to "Entrar", login_path %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main style="padding: 20px;"> 
+      <% if notice %>
+        <p style="color: green; border: 1px solid green; padding: 10px; margin-bottom: 10px;"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 10px;"><%= alert %></p>
+      <% end %>
+
+      <%= yield %> 
+    </main>
+
   </body>
 </html>

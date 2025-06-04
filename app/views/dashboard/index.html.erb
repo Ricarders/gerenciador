@@ -1,0 +1,29 @@
+<h1>Painel do Correntista</h1>
+
+<% if current_correntista %>
+  <p>Bem-vindo(a), <%= current_correntista.nome %>!</p>
+  <p>Conta Corrente: <%= current_correntista.numero_conta %></p>
+  <p>Perfil: <%= current_correntista.perfil %></p>
+  <% if @saldo != "N/A" %>
+    <p><strong>Saldo Atual: <%= number_to_currency(@saldo, unit: "R$", separator: ",", delimiter: ".") %></strong></p>
+  <% else %>
+    <p><strong>Saldo Atual: Informação indisponível</strong></p>
+  <% end %>
+<% else %>
+  <p>Não foi possível identificar o correntista logado.</p>
+<% end %>
+
+<hr>
+<h2>Opções:</h2>
+<ul>
+    <li><%= link_to "Extrato", extrato_path %></li>
+    <li><%= link_to "Saque", novo_saque_path %></li>
+    <li><%= link_to "Depósito", novo_deposito_path %></li>
+    <li>Transferência (ainda não implementado)</li>
+    <% if current_correntista && current_correntista.perfil == "VIP" %>
+    <li>Solicitar visita do gerente (ainda não implementado)</li>
+    <% end %>
+</ul>
+<hr>
+
+<%= button_to "Sair (Logout)", logout_path, method: :delete, data: { turbo_confirm: "Tem certeza que deseja sair?" } %>
