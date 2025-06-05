@@ -23,6 +23,7 @@ class ExtratosController < ApplicationController
     @correntista = current_correntista
     if @correntista&.conta
       conta = @correntista.conta
+      # Aplica juros VIP pendentes antes de exibir o saldo.
       if conta.correntista.perfil == "VIP" && conta.saldo.negative? && conta.inicio_periodo_negativo.present?
         conta.aplicar_juros_saldo_negativo_vip!
         conta.reload

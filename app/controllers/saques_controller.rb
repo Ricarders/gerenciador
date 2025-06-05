@@ -28,12 +28,14 @@ class SaquesController < ApplicationController
     valor_saque_str = params[:valor_saque].to_s.tr(',', '.')
     valor_saque = BigDecimal(valor_saque_str) rescue nil
 
+    # Valida o valor do saque
     if valor_saque.nil? || valor_saque <= 0
       flash.now[:alert] = "Valor de saque inválido."
       @saldo_atual = conta.saldo
       render :new, status: :unprocessable_entity
       return
     end
+
 
     juros_aplicados_nesta_acao = false
     if @correntista.perfil == "VIP" && conta.saldo.negative? && conta.inicio_periodo_negativo.present?

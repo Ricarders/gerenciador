@@ -46,6 +46,7 @@ class TransferenciasController < ApplicationController
     taxa_transferencia = calcular_taxa_transferencia(@correntista_remetente, valor_transferencia)
     valor_total_debito = valor_transferencia + taxa_transferencia
 
+    # Valida limite de transferência e saldo para correntista Normal
     if @correntista_remetente.perfil == "Normal"
       if valor_transferencia > 1000.00
         flash.now[:alert] = "Transferência excede o limite de R$ 1.000,00 para seu perfil."

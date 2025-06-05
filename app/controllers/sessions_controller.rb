@@ -1,22 +1,19 @@
 class SessionsController < ApplicationController
 
-  # GET /login
   def new
     if current_correntista
       redirect_to root_path_autenticado, notice: "Você já está logado."
     end
   end
 
-# POST /login
   def create
+    # Autentica o correntista
     correntista = Correntista.find_by(numero_conta: params[:session][:numero_conta])
     if correntista && correntista.authenticate(params[:session][:senha])
-      # Login bem-sucedido
       session[:correntista_id] = correntista.id
       flash[:notice] = "Login realizado com sucesso!"
       redirect_to root_path_autenticado
     else
-      # Falha no login
       flash.now[:alert] = "Número da conta ou senha inválidos."
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +29,7 @@ class SessionsController < ApplicationController
   private
 
   def root_path_autenticado
-    dashboard_path # Criar essa rota e controller.
+    dashboard_path 
   end
 
 end

@@ -10,6 +10,7 @@ class DepositosController < ApplicationController
   valor_deposito_str = params[:valor_deposito].to_s.tr(',', '.')
   valor_deposito = BigDecimal(valor_deposito_str) rescue nil
 
+  # Valida o valor do depósito
   if valor_deposito.nil? || valor_deposito <= 0
     flash.now[:alert] = "Valor de depósito inválido."
     render :new, status: :unprocessable_entity
@@ -24,6 +25,7 @@ class DepositosController < ApplicationController
     end
   end
 
+  # Garante atomicidade
   ActiveRecord::Base.transaction do
     conta.movimentacoes.create!(
       descricao: "Depósito em conta",
