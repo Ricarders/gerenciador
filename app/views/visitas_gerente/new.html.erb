@@ -1,0 +1,22 @@
+<div class="form-page-container">
+  <div class="operation-box">
+    <h1>Solicitar Visita do Gerente</h1>
+
+    <% if @saldo_atual %>
+      <div class="current-balance-info">
+        Seu saldo atual é: <strong><%= number_to_currency(@saldo_atual, unit: "R$", separator: ",", delimiter: ".") %></strong>
+      </div>
+    <% end %>
+
+    <p style="margin-bottom: 25px;">Confirmar a solicitação de visita do gerente? Uma taxa de <strong><%= number_to_currency(@taxa_visita, unit: "R$", separator: ",", delimiter: ".") %></strong> será debitada da sua conta.</p>
+
+    <%= form_with(url: criar_solicitacao_visita_path, method: :post, local: true, data: { turbo: false }) do |form| %>
+      <div class="actions">
+        <%= form.submit "Sim, confirmar solicitação", class: "button-primary" %>
+      </div>
+    <% end %>
+    <div class="form-links">
+      <%= link_to "Não, cancelar e voltar ao Painel", dashboard_path %>
+    </div>
+  </div>
+</div>

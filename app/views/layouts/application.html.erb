@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Gerenciador" %></title>
+    <title><%= content_for(:title) || "Banco Digital" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -12,24 +12,27 @@
 
 
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%22 y=%22.9em%22 font-size=%2290%22 text-anchor=%22middle%22>🏦</text></svg>">
 
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <header> 
-      <nav style="padding: 10px; background-color: #f0f0f0; margin-bottom: 20px; text-align: right;">
-        <% if logged_in? %>
-          <span style="margin-right: 10px;">Olá, <%= current_correntista.nome %>!</span>
-          <%= button_to "Sair", logout_path, method: :delete, style: "display: inline-block;" %>
-        <% else %>
-          <%= link_to "Entrar", login_path %>
-        <% end %>
-      </nav>
+    <header class="main-header"> 
+      <div class="container">
+        <div class="logo">
+          Banco Digital
+        </div>
+        <nav>
+          <% if logged_in? %>
+            <span style="margin-right: 15px; vertical-align: middle;">Olá, <%= current_correntista.nome %>!</span>
+            <%= button_to "Sair", logout_path, method: :delete, class: "nav-button" %> 
+          <% else %>
+            <%= link_to "Entrar", login_path, class: "nav-button" %>
+          <% end %>
+        </nav>
+      </div>
     </header>
 
     <main style="padding: 20px;"> 

@@ -1,0 +1,28 @@
+<div class="form-page-container">
+  <div class="operation-box">
+    <h1>Realizar Transferência</h1>
+
+    <% if @saldo_atual %> <%# Se você passou @saldo_atual do controller %>
+      <div class="current-balance-info">
+        Seu saldo atual é: <strong><%= number_to_currency(@saldo_atual, unit: "R$", separator: ",", delimiter: ".") %></strong>
+      </div>
+    <% end %>
+
+    <%= form_with(url: realizar_transferencia_path, method: :post, local: true, data: { turbo: false }) do |form| %>
+      <div class="field">
+        <%= form.label :numero_conta_destino, "Número da Conta de Destino (5 dígitos):" %>
+        <%= form.text_field :numero_conta_destino, maxlength: 5, placeholder: "Ex: 33333", class: "form-input" %>
+      </div>
+      <div class="field">
+        <%= form.label :valor_transferencia, "Valor da Transferência (R$):" %>
+        <%= form.text_field :valor_transferencia, placeholder: "Ex: 100.00 ou 100,00", class: "form-input", type: "text", inputmode: "decimal" %>
+      </div>
+      <div class="actions" style="margin-top: 30px;">
+        <%= form.submit "Transferir", class: "button-primary" %>
+      </div>
+    <% end %>
+    <div class="form-links">
+      <%= link_to "Cancelar e Voltar ao Painel", dashboard_path %>
+    </div>
+  </div>
+</div>

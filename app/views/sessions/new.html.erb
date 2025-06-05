@@ -1,21 +1,21 @@
-<h1>Login do Correntista</h1>
+<div class="login-container">
+  <div class="login-box">
+    <h1>Login do Correntista</h1>
 
-<%= form_with(scope: :session, url: login_path, local: true, data: { turbo: false }) do |form| %>
-  <% if flash.now[:alert] %>
-    <p style="color: red;"><%= flash.now[:alert] %></p>
-  <% end %>
+    <%= form_with(scope: :session, url: login_path, local: true, data: { turbo: false }) do |form| %>
+      <div class="field">
+        <%= form.label :numero_conta, "Número da Conta (5 dígitos)" %><br>
+        <%= form.text_field :numero_conta, maxlength: 5, class: "form-input" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :numero_conta, "Número da Conta (5 dígitos)" %><br>
-    <%= form.text_field :numero_conta, maxlength: 5 %>
+      <div class="field">
+        <%= form.label :senha, "Senha (4 dígitos numéricos)" %><br>
+        <%= form.password_field :senha, maxlength: 4, class: "form-input" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Entrar", class: "button-primary" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= form.label :senha, "Senha (4 dígitos numéricos)" %><br>
-    <%= form.password_field :senha, maxlength: 4 %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Entrar" %>
-  </div>
-<% end %>
+</div>

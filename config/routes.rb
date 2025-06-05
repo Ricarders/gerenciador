@@ -20,6 +20,14 @@ Rails.application.routes.draw do
   get 'saque', to: 'saques#new', as: 'novo_saque'
   post 'saque', to: 'saques#create', as: 'realizar_saque'
 
+  # Rotas para a transferência
+  get 'transferencia', to: 'transferencias#new', as: 'nova_transferencia'
+  post 'transferencia', to: 'transferencias#create', as: 'realizar_transferencia'
+
+  # Rotas para a visita
+  get 'solicitar_visita_gerente', to: 'visitas_gerente#new', as: 'nova_solicitacao_visita'
+  post 'solicitar_visita_gerente', to: 'visitas_gerente#create', as: 'criar_solicitacao_visita'
+
   root to: redirect('/login')
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

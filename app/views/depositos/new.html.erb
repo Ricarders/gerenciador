@@ -1,19 +1,21 @@
-<h1>Realizar Depósito</h1>
+<div class="form-page-container">
+  <div class="operation-box">
+    <h1>Realizar Depósito</h1>
 
-<% if flash.now[:alert] %>
-  <p style="color: red;"><%= flash.now[:alert] %></p>
-<% end %>
+    <%= form_with(url: criar_deposito_path, method: :post, local: true, data: { turbo: false }) do |form| %>
+      
+      <div class="field">
+        <%= form.label :valor_deposito, "Valor do Depósito (R$):" %>
+        <%= form.text_field :valor_deposito, placeholder: "Ex: 100.00 ou 100,00", class: "form-input", type: "text", inputmode: "decimal" %>
+      </div>
 
-<%= form_with(url: criar_deposito_path, method: :post, local: true, data: { turbo: false }) do |form| %>
-  <div class="field">
-    <%= form.label :valor_deposito, "Valor do Depósito (R$)" %><br>
-    <%= form.text_field :valor_deposito, placeholder: "Ex: 100.00 ou 100,00" %>
+      <div class="actions" style="margin-top: 30px;">
+        <%= form.submit "Depositar", class: "button-primary" %>
+      </div>
+    <% end %>
+
+    <div class="form-links">
+      <%= link_to "Cancelar e Voltar ao Painel", dashboard_path %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= form.submit "Depositar" %>
-  </div>
-<% end %>
-
-<hr>
-<%= link_to "Cancelar e Voltar ao Painel", dashboard_path %>
+</div>

@@ -1,29 +1,33 @@
 <h1>Painel do Correntista</h1>
 
 <% if current_correntista %>
-  <p>Bem-vindo(a), <%= current_correntista.nome %>!</p>
   <p>Conta Corrente: <%= current_correntista.numero_conta %></p>
   <p>Perfil: <%= current_correntista.perfil %></p>
-  <% if @saldo != "N/A" %>
-    <p><strong>Saldo Atual: <%= number_to_currency(@saldo, unit: "R$", separator: ",", delimiter: ".") %></strong></p>
-  <% else %>
-    <p><strong>Saldo Atual: Informação indisponível</strong></p>
-  <% end %>
+
+  <div class="saldo-container" style="margin-top: 20px; margin-bottom: 30px; padding: 20px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 10px; text-align: center;">
+    <h3 style="margin-top: 0; margin-bottom: 10px; color: #495057;">Saldo Atual</h3>
+    <% if @saldo != "N/A" %>
+      <p style="font-size: 2.5em; font-weight: bold; color: <%= @saldo.negative? ? '#dc3545' : '#28a745' %>; margin: 0;">
+        <%= number_to_currency(@saldo, unit: "R$", separator: ",", delimiter: ".") %>
+      </p>
+    <% else %>
+      <p style="font-size: 1.5em; color: #6c757d;">Informação indisponível</p>
+    <% end %>
+  </div>
+
 <% else %>
   <p>Não foi possível identificar o correntista logado.</p>
 <% end %>
 
-<hr>
 <h2>Opções:</h2>
-<ul>
+<ul class="dashboard-options">
     <li><%= link_to "Extrato", extrato_path %></li>
     <li><%= link_to "Saque", novo_saque_path %></li>
     <li><%= link_to "Depósito", novo_deposito_path %></li>
-    <li>Transferência (ainda não implementado)</li>
-    <% if current_correntista && current_correntista.perfil == "VIP" %>
-    <li>Solicitar visita do gerente (ainda não implementado)</li>
+    <li><%= link_to "Transferência", nova_transferencia_path %></li>
+    <% if @correntista && @correntista.perfil == "VIP" %>
+      <li><%= link_to "Solicitar visita do gerente", nova_solicitacao_visita_path %></li>
     <% end %>
 </ul>
-<hr>
 
-<%= button_to "Sair (Logout)", logout_path, method: :delete, data: { turbo_confirm: "Tem certeza que deseja sair?" } %>
+

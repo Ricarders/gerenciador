@@ -3,6 +3,7 @@
 <% if @correntista %>
   <p><strong>Correntista:</strong> <%= @correntista.nome %></p>
   <p><strong>Conta Corrente:</strong> <%= @correntista.numero_conta %></p>
+  
 <% end %>
 
 <hr>
@@ -37,4 +38,4 @@
 <% end %>
 
 <hr>
-<%= link_to "Voltar ao Painel", dashboard_path %>
+<%= button_to "Voltar", dashboard_path, method: :get, class: "button-secondary" %>
