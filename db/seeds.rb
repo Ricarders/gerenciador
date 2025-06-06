@@ -62,7 +62,6 @@ if correntista_vip&.conta
     valor: 50000.00,
     tipo_transacao: "DEPOSITO"
   )
-  # conta_vip.update!(saldo: 50000.00) # Mesma lógica do acima
   puts "Movimentação de depósito inicial criada para #{correntista_vip.nome}."
 end
 
